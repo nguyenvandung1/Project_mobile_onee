@@ -12,7 +12,8 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
-      "**/*"
+      "**/*",
+      "assets/images/imgAuth/login.svg"
     ],
     "ios": {
       "supportsTablet": true
