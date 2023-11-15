@@ -11,6 +11,7 @@ function AuthStack() {
             {/* <Stack.Navigator initialRouteName='OnBoardingScreen'/> */}
             {/* <Stack.Screen name="HomeScreen" component={HomeScreen}/> */}
             {/* <Stack.Screen name='HomeUserStack' component={HomeUserStack}/> */}
+            
             <Stack.Screen name="HomeScreen" component={User}/>
             <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} />

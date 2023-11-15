@@ -55,13 +55,39 @@ export default function ProductDetails({ route, navigation }) {
 
   // heart
   // FavoriteProducts.find()
-  const [isLiked, setIsLiked] = useState(false);
+  const itemIndex = -1;
+  const checkItems = ()=>{
+    if(FavoriteProducts.length == 0){
+      return false
+    } else{
+      const itemIndex = FavoriteProducts.findIndex((item, index)=>{
+        return item.title == productItem.title;
+      })
+  
+      if(itemIndex == -1){
+        return false;
+      } else{
+        return true;
+      }
+    }
+    
+  }
+  
+  const [isLiked, setIsLiked] = useState(checkItems());
 
   const handlePress = () => {
     setIsLiked(!isLiked);
     if(isLiked){
-      
+        FavoriteProducts.push(productItem);
+    } else{
+      if(FavoriteProducts.length != 0){
+        const itemIndex = FavoriteProducts.findIndex((item, index)=>{
+          return item.title == productItem.title;
+        })
+        FavoriteProducts.splice(itemIndex, 1);
+      }
     }
+    console.log(FavoriteProducts.length);
   };
 
   return (
