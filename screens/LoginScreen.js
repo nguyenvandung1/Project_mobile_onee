@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
                 />
                 <InputField label={'PassWord'} inputType={'PassWord'}
                     icon={<Ionicons name="ios-lock-closed-outline" size={20} color="#666" style={{ marginRight: 5 }} />} fieldButtonLabel={'Forget?'} fieldButtonFunction={() => navigation.navigate('ForgetScreen')} />
-                <CustomButtonAuth label={"Login"} onPress={() => { }} />
+                <CustomButtonAuth label={"Login"} onPress={() => { navigation.navigate('HomeScreen') }} />
                 <Text style={styles.textLoginWith}>Or, login with...</Text>
                 <View style={styles.containerLoginMedia}>
                     <TouchableOpacity onPress={() => { }} style={styles.loginMedia}>
