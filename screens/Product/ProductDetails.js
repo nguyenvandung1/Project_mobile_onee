@@ -55,37 +55,28 @@ export default function ProductDetails({ route, navigation }) {
 
   // heart
   // FavoriteProducts.find()
-  const itemIndex = -1;
-  const checkItems = ()=>{
-    if(FavoriteProducts.length == 0){
-      return false
-    } else{
-      const itemIndex = FavoriteProducts.findIndex((item, index)=>{
-        return item.title == productItem.title;
-      })
-  
-      if(itemIndex == -1){
-        return false;
-      } else{
-        return true;
-      }
-    }
-    
-  }
-  
-  const [isLiked, setIsLiked] = useState(checkItems());
 
+  const [indexIT, setIndexIT] = useState(
+    FavoriteProducts.findIndex((item) => {
+      return item.title === productItem.title;
+    })
+  );
+  
+  
+  const [isLiked, setIsLiked] = useState( indexIT != -1 );
+  
   const handlePress = () => {
+    // isLiked ? console.log(true) : console.log(false);
     setIsLiked(!isLiked);
-    if(isLiked){
-        FavoriteProducts.push(productItem);
+    // !isLiked ? console.log(true) : console.log(false); 
+
+    if(!isLiked){
+      FavoriteProducts.push(productItem);
     } else{
-      if(FavoriteProducts.length != 0){
-        const itemIndex = FavoriteProducts.findIndex((item, index)=>{
-          return item.title == productItem.title;
-        })
-        FavoriteProducts.splice(itemIndex, 1);
-      }
+      let vt = FavoriteProducts.findIndex((item) => {
+        return item.title === productItem.title;
+      })
+      FavoriteProducts.splice(vt, 1);
     }
     console.log(FavoriteProducts.length);
   };
@@ -111,7 +102,7 @@ export default function ProductDetails({ route, navigation }) {
             >
               {productItem.img.map((img, index) => {
                 return (
-                  <View className='justify-center items-center' style={{ height: height * 0.4, width: width }}>
+                  <View key={index} className='justify-center items-center' style={{ height: height * 0.4, width: width }}>
                     <Image className='w-60' style={st.img} source={img} />
                   </View>
                 )
@@ -149,7 +140,7 @@ export default function ProductDetails({ route, navigation }) {
             </View>
 
             <TouchableOpacity onPress={handlePress}>
-              <Ionicon name={isLiked ? 'heart' : 'heart-outline'} size='25' color={'red'}/>
+              <Ionicon name={isLiked ? 'heart' : 'heart-outline'} size={25} color={'red'}/>
             </TouchableOpacity>
 
             <View className='my-4'>

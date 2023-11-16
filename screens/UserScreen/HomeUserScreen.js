@@ -48,8 +48,8 @@ export default function HomeUser({ navigation }) {
   };
 
 
-  const dots = imgSliderHome.map((i) => (
-    <TouchableOpacity key={i.id} className='justify-center items-center mx-2 h-12'   onPress={() => dotClick(i.id)}>
+  const dots = imgSliderHome.map((i, index) => (
+    <TouchableOpacity key={index} className='justify-center items-center mx-2 h-12'   onPress={() => dotClick(index)}>
       <Text 
         className={`text-6xl h-12 font-thin ${indexSlide === i.id ? 'text-black font-extralight' : 'text-gray-300 font-thin'
           }`}
@@ -115,7 +115,7 @@ export default function HomeUser({ navigation }) {
       navigation.navigate('ProductDetails', { productItem: item });
     };
     return (
-      <TouchableOpacity  onPress={() => {navigateToProductDetails()}} className='w-44 h-80 items-center bg-white rounded-lg mx-2' style={{ elevation: 5, shadowColor: 'black', shadowOffset: { width: 1, height: 2 }, shadowOpacity: 0.1, shadowRadius: 2, }}>
+      <TouchableOpacity key={index}  onPress={() => {navigateToProductDetails()}} className='w-44 h-80 items-center bg-white rounded-lg mx-2' style={{ elevation: 5, shadowColor: 'black', shadowOffset: { width: 1, height: 2 }, shadowOpacity: 0.1, shadowRadius: 2, }}>
         <View className='h-40 mt-6'>
           <Image className='w-36 h-36' style={{ objectFit: 'contain' }} source={item.img[0]} />
         </View>
@@ -180,6 +180,8 @@ export default function HomeUser({ navigation }) {
           }}
 
         >
+
+        {/* SLIDER */}
           <View className=' w-full justify-center items-center' style={{ flex: 0.9 }}>
             <ScrollView
               onScroll={({ nativeEvent }) => onChange(nativeEvent)}
@@ -192,7 +194,7 @@ export default function HomeUser({ navigation }) {
             >
               {imgSliderHome.map((img, index) => {
                 return (
-                  <View className='justify-center items-center' style={{ width: width }}>
+                  <View key={index} className='justify-center items-center' style={{ width: width }}>
                     <Image className='object-contain' style={st.img}  source={img.img} />
                   </View>
                 )
