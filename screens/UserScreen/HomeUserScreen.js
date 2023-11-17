@@ -151,7 +151,7 @@ export default function HomeUser({ navigation }) {
       </View>
 
       <View className='' style={{ flex: 0.9 }}>
-        <View className='h-10 my-2 justify-center items-center flex-row border-slate-400 ' style={st.shadowHeader}>
+        <View className='h-10 my-2 justify-center items-center flex-row border-slate-400 ' style={{}}>
           {pagination.map((item) => {
             const id = item.id;
             return (

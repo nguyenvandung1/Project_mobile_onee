@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 
 
 
-const ip1 = require('../assets/images/product/iphone-14-pro-max-128gb.png'), ip2 = require('../assets/images/product/iphone-15-pro-max-256gb_260.png')
+const ip1 = require('../assets/images/product/iphone-14-pro-max-128gb.png'), ip2 = require('../assets/images/product/iphone-15-pro-max-256gb_260.png'), ip4 = require('../assets/images/product/0000594_ipad-air-4_240.png'), ip5 = require('../assets/images/product/0006205_ipad-gen-9-102-inch-wifi-64gb_240.png'), ip6 = require('../assets/images/product/0010883_ipad-pro-m1-129-inch-wifi-cellular-512gb_240.png')
+
 const dataProduct = [
     {
         img: [ip1, ip2],
@@ -25,7 +26,7 @@ const dataProduct = [
     },
     {
         img: [require('../assets/images/product/iphone-15-pro-128gb_250.png')],
-        title: 'iPhone 14 Pro Max 128GB',
+        title: 'iPhone 14 Pro 128GB',
         priceNew: 26550000,
         priceOld: 34990000,
         quantity: 9,
@@ -40,6 +41,33 @@ const dataProduct = [
         quantity: 9,
         productInfo: '',
         typeProduct: 'iphone'
+    },
+    {
+        img: [ip4],
+        title: 'iPad 4',
+        priceNew: 26550000,
+        priceOld: 34990000,
+        quantity: 9,
+        productInfo: '',
+        typeProduct: 'iPad'
+    },
+    {
+        img: [ip5],
+        title: 'iPad Pro M1 12.9 inch WiFi Cellular 512GB',
+        priceNew: 26550000,
+        priceOld: 34990000,
+        quantity: 9,
+        productInfo: '',
+        typeProduct: 'iPad'
+    },
+    {
+        img: [ip6],
+        title: 'iPad Pro M2 12.9 inch WiFi Cellular 512GB',
+        priceNew: 26550000,
+        priceOld: 34990000,
+        quantity: 9,
+        productInfo: '',
+        typeProduct: 'iPad'
     },
 ]
 

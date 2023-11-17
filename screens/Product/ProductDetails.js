@@ -1,7 +1,9 @@
 import { View, Text, TouchableOpacity, Dimensions, ScrollView, StyleSheet, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Ionicon from 'react-native-vector-icons/Ionicons'
-import { dataFavorite } from '../../data/data';
+import { useFavoriteProducts } from '../../context/context';
+// import { dataFavorite } from '../../data/data';
+
 
 
 
@@ -57,7 +59,7 @@ export default function ProductDetails({ route, navigation }) {
 
   // heart
   // FavoriteProducts.find()
-  const [favoriteProducts, setFavoriteProducts] = useState([...dataFavorite]);
+  const { favoriteProducts, setFavoriteProducts } = useFavoriteProducts();
 
   const checkIL = () => favoriteProducts.findIndex(item => item.title === productItem.title);
 
