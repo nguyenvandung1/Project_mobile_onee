@@ -1,13 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthStack } from './navigation/index'
-
+import { FavoriteProductsProvider } from './context/context';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <AuthStack />
-    </NavigationContainer>
+    <FavoriteProductsProvider>
+      <NavigationContainer>
+        <AuthStack />
+      </NavigationContainer>
+    </FavoriteProductsProvider>
   );
 }
 

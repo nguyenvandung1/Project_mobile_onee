@@ -1,13 +1,15 @@
 import { View, Text, TouchableOpacity, Dimensions, ScrollView, StyleSheet, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Ionicon from 'react-native-vector-icons/Ionicons'
-import { FavoriteProducts } from '../../data/data';
+import { dataFavorite } from '../../data/data';
 
 
 
 const { width, height } = Dimensions.get('window');
 
 export default function ProductDetails({ route, navigation }) {
+
+
   const { productItem } = route.params;
   let priceNew = productItem.priceNew.toLocaleString('en-US');
   let priceOld = productItem.priceOld.toLocaleString('en-US');
@@ -55,31 +57,33 @@ export default function ProductDetails({ route, navigation }) {
 
   // heart
   // FavoriteProducts.find()
+  const [favoriteProducts, setFavoriteProducts] = useState([...dataFavorite]);
 
-  const [indexIT, setIndexIT] = useState(
-    FavoriteProducts.findIndex((item) => {
-      return item.title === productItem.title;
-    })
-  );
-  
-  
-  const [isLiked, setIsLiked] = useState( indexIT != -1 );
-  
+  const checkIL = () => favoriteProducts.findIndex(item => item.title === productItem.title);
+
+  const indexIT = checkIL();
+
+  const [isLiked, setIsLiked] = useState(indexIT !== -1);
+
   const handlePress = () => {
-    // isLiked ? console.log(true) : console.log(false);
     setIsLiked(!isLiked);
-    // !isLiked ? console.log(true) : console.log(false); 
 
-    if(!isLiked){
-      FavoriteProducts.push(productItem);
-    } else{
-      let vt = FavoriteProducts.findIndex((item) => {
-        return item.title === productItem.title;
-      })
-      FavoriteProducts.splice(vt, 1);
-    }
-    console.log(FavoriteProducts.length);
+    setFavoriteProducts(prevFavoriteProducts => {
+      if (!isLiked) {
+        // Nếu chưa thích, thêm productItem vào favoriteProducts
+        return [...prevFavoriteProducts, productItem];
+      } else {
+        // Nếu đã thích, loại bỏ productItem khỏi favoriteProducts
+        const updatedProducts = prevFavoriteProducts.filter(item => item.title !== productItem.title);
+        return updatedProducts;
+      }
+    });
+  console.log(favoriteProducts.length);
+  dataFavorite = [...favoriteProducts]
   };
+
+  // console.log(favoriteProducts.length);
+
 
   return (
     <View className='flex-1 bg-neutral-100 items-center pt-5'>
@@ -140,7 +144,7 @@ export default function ProductDetails({ route, navigation }) {
             </View>
 
             <TouchableOpacity onPress={handlePress}>
-              <Ionicon name={isLiked ? 'heart' : 'heart-outline'} size={25} color={'red'}/>
+              <Ionicon name={isLiked ? 'heart' : 'heart-outline'} size={25} color={'red'} />
             </TouchableOpacity>
 
             <View className='my-4'>
@@ -180,9 +184,9 @@ export default function ProductDetails({ route, navigation }) {
         </ScrollView>
       </View>
       <View style={{ height: height * 0.10, width: width }} className=' items-center'>
-      <TouchableOpacity className='h-14 rounded-xl bg-orange-400' style={{width: width*0.98}}>
-        <Text className='text-center my-auto text-white text-xl font-medium'>Đặt hàng ngay</Text>
-      </TouchableOpacity>
+        <TouchableOpacity className='h-14 rounded-xl bg-orange-400' style={{ width: width * 0.98 }}>
+          <Text className='text-center my-auto text-white text-xl font-medium'>Đặt hàng ngay</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )

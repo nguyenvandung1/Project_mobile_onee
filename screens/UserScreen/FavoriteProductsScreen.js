@@ -4,6 +4,7 @@ import Ionicon from 'react-native-vector-icons/Ionicons'
 import { FavoriteProducts, imgSliderHome } from '../../data/data';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { StackView } from '@react-navigation/stack';
+import { useFavoriteProducts } from '../../context/context';
 const { width, height } = Dimensions.get('window');
 
 export default function FavoriteProductsScreen() {
@@ -47,59 +48,97 @@ export default function FavoriteProductsScreen() {
 
   // select list
   const dataSL = [
-    { id: 1, value: 'Tất cả' },
-    { id: 2, value: 'iPhone' },
-    { id: 3, value: 'iPad' },
-    { id: 4, value: 'Macbook' },
+    // { id: 1, value: 'Tất cả' },
+    // { id: 2, value: 'iPhone' },
+    // { id: 3, value: 'iPad' },
+    // { id: 4, value: 'Macbook' },
+    'Tất cả', 'iPhone', 'iPad', 'Macbook'
   ]
-  const [selected, setSelected] = useState(dataSL[0]);
+  const [selectType, setselectType] = useState(dataSL[0]);
 
 
-  // console.log(selected);
+  // console.log(selectType);
 
   // item
   const [arrItems, setArrItems] = useState(FavoriteProducts);
 
-  const deleteI = (index) => {
-    FavoriteProducts.splice(index, 1);
-    setArrItems(FavoriteProducts);
-  }
-
-  const renderItems = (value) => {
-    const list = useMemo(() => arrItems.filter((item) => item.typeProduct === value), [arrItems, value]);
-    return (
-      <ScrollView style={{ width: width }}>
-        {list.map((item, index) => {
-          return (
-            <TouchableOpacity key={index}>
-              <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
-                <Image className='object-contain h-20 w-16' source={item.img[0]} />
-                <Text>{item.title}</Text>
-                <TouchableOpacity key={index} onPress={(index) => { deleteI(index) }}>
-                  <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
-                </TouchableOpacity>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-    );
-  };
-
+  
 
 
   const updateSelect = (it) => {
-    setSelected(it);
-    setArrItems(FavoriteProducts);
+    console.log(it);
+    setselectType(it);
+
+    // setArrItems(FavoriteProducts);
   };
 
-  // const handleSelect = useCallback(() => {
-  //   setArrItems(FavoriteProducts);
-  // }, [FavoriteProducts]);
+  const renderItems = () => {
+    // let vl = selectType.value;
+    // const list = useMemo(() => FavoriteProducts.filter((item) => item.typeProduct === selectType.value), [FavoriteProducts, selectType]);
+    let list = FavoriteProducts.filter((item, i) => {
+      console.log('id1: ' + selectType);
+      item.typeProduct === selectType
+    })
+    if (list.length == 0 && FavoriteProducts.length == 0) {
+      console.log('id2: ' + selectType + " " + FavoriteProducts.length);
+      return (
+        <View className='w-full my-5'>
+          <Text className='text-center text-xl font-normal'>Danh sách sản phẩm trống!</Text>
+        </View>
+      )
+    } else {
+      if (selectType == 'Tất cả') {
+        return (
+          FavoriteProducts.map((item, index) => {
+            return (
+              <TouchableOpacity key={index}>
+                <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
+                  <Image className='object-contain h-20 w-16' source={item.img[0]} />
+                  <Text>{item.title}</Text>
+                  <TouchableOpacity key={index} onPress={(index) => { deleteI(index) }}>
+                    <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
+                  </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
+            );
+          })
+        )
+      } else {
+        {
+          list.map((item, index) => {
+            return (
+              <TouchableOpacity key={index}>
+                <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
+                  <Image className='object-contain h-20 w-16' source={item.img[0]} />
+                  <Text>{item.title}</Text>
+                  <TouchableOpacity key={index} onPress={(index) => { deleteI(index) }}>
+                    <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
+                  </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
+            );
+          })
+        }
+      }
+    }
+  };
 
-  // useEffect(() => {
-  //   renderItems(); // Gọi lại renderItems khi dependencies thay đổi
-  // }, [selected, arrItems]); // Thêm các dependencies cần theo dõi (selected và arrItems)
+
+
+  const [products, setProducts] = useState(FavoriteProducts);
+
+  useEffect(() => {
+    setProducts(FavoriteProducts);
+  }, [FavoriteProducts]);
+
+  const deleteI = (index) => {
+    const arrN = [...FavoriteProducts];
+
+    setselectType(selectType)
+    FavoriteProducts.splice(index, 1);
+    arrN.splice(index, 1);
+    setProducts(arrN)
+  }
 
 
 
@@ -123,7 +162,7 @@ export default function FavoriteProductsScreen() {
             >
               {imgSliderHome.map((img, index) => {
                 return (
-                  <View className='justify-center items-center' style={{ width: width }}>
+                  <View key={index} className='justify-center items-center' style={{ width: width }}>
                     <Image className='object-contain' style={st.img} source={img.img} />
                   </View>
                 )
@@ -143,7 +182,7 @@ export default function FavoriteProductsScreen() {
 
             <View className='h-56 w-full'>
               <ScrollView style={{ width: width }}>
-                {FavoriteProducts.map((item, index) => {
+                {products.map((item, index) => {
                   return (
                     <TouchableOpacity key={index}>
                       <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>

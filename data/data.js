@@ -1,4 +1,8 @@
 
+import React, { useEffect, useState } from 'react'
+
+
+
 const ip1 = require('../assets/images/product/iphone-14-pro-max-128gb.png'), ip2 = require('../assets/images/product/iphone-15-pro-max-256gb_260.png')
 const dataProduct = [
     {
@@ -79,9 +83,15 @@ const imgSliderHome = [{
     id: 6
 }];
 
+let dataFavorite = [];
 
-let FavoriteProducts = [];
-export { dataProduct, imgSliderHome, FavoriteProducts };
+// const [FavoriteProduct, setFavoriteProducts] = useState();
+
+// useEffect(() => {
+//     setFavoriteProducts([])
+// }, [])
+
+export { dataProduct, imgSliderHome , dataFavorite};
 
 
 
