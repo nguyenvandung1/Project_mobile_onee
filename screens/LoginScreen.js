@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, StatusBar, TouchableOpacity, ScrollView } from 'react-native'
 import { InputField, CustomButtonAuth } from '../components'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -8,7 +8,33 @@ import LoginSvg from '../assets/images/imgAuth/login.svg'
 import GoogleSvg from '../assets/images/imgAuth/google.svg'
 import FacebookSvg from '../assets/images/imgAuth/facebook.svg'
 import TwitterSvg from '../assets/images/imgAuth/twitter.svg'
+import { useUserAccounts } from '../context/context'
 const LoginScreen = ({ navigation }) => {
+
+    const { userAccounts, addUser } = useUserAccounts();
+    const [mail, setMail] = useState('');
+    const [pass, setPass] = useState('');
+
+
+    const checkLogin = () =>{
+        if(userAccounts.length == 0){
+            console.warn('tài khoản hoặc mật khẩu không chính xác')
+            return;
+        }
+        const check = userAccounts.findIndex((item, i)=>{
+            return item.mail == mail && item.pass == pass;
+        })
+        // console.log(check);
+
+        if(check != -1){
+            navigation.navigate('HomeScreen', {user: userAccounts[check]})
+        } else{
+            console.warn('tài khoản hoặc mật khẩu không chính xác')
+        }
+    }
+
+    
+
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
             <ScrollView style={{ paddingHorizontal: 25 }}>
@@ -17,13 +43,13 @@ const LoginScreen = ({ navigation }) => {
                     <LoginSvg width={300} height={300} style={{ transform: [{ rotate: '-5deg' }] }} />
                 </View>
                 <Text style={styles.titleLogin}>Login</Text>
-                <InputField
+                <InputField valu={mail} onchange={setMail}
                     label={'Email ID'} keyBoardType={'email-address'}
                     icon={<MaterialIcons name="alternate-email" size={20} color="#666" style={{ marginRight: 5 }} />}
                 />
-                <InputField label={'PassWord'} inputType={'PassWord'}
+                <InputField label={'PassWord'} inputType={'PassWord'} valu={pass} onchange={setPass}
                     icon={<Ionicons name="ios-lock-closed-outline" size={20} color="#666" style={{ marginRight: 5 }} />} fieldButtonLabel={'Forget?'} fieldButtonFunction={() => navigation.navigate('ForgetScreen')} />
-                <CustomButtonAuth label={"Login"} onPress={() => { navigation.navigate('HomeScreen') }} />
+                <CustomButtonAuth label={"Login"} onPress={() => { checkLogin() }} />
                 <Text style={styles.textLoginWith}>Or, login with...</Text>
                 <View style={styles.containerLoginMedia}>
                     <TouchableOpacity onPress={() => { }} style={styles.loginMedia}>

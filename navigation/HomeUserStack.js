@@ -3,6 +3,7 @@ import React from 'react'
 // import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { HomeUser, ProductDetails } from '../screens'
+import OrderScreen from '../screens/Product/OrderScreen';
 
 
 
@@ -15,6 +16,7 @@ export default function HomeUserStack() {
         }}>
           <stack.Screen name='HomeUserSC' component={HomeUser}/>
           <stack.Screen name='ProductDetails' component={ProductDetails}/>
+          <stack.Screen name='OrderScreen' component={OrderScreen}/>
         </stack.Navigator>
   )
 }

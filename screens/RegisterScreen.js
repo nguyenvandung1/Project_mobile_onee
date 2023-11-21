@@ -9,18 +9,43 @@ import GoogleSvg from '../assets/images/imgAuth/google.svg'
 import FacebookSvg from '../assets/images/imgAuth/facebook.svg'
 import TwitterSvg from '../assets/images/imgAuth/twitter.svg'
 import { CustomButtonAuth, InputField } from '../components'
+import { useUserAccounts } from '../context/context'
+
 const RegisterScreen = ({ navigation }) => {
+
+    const { userAccounts, addUser } = useUserAccounts();
+
+
+
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
     const [dobLabel, setDobLabel] = useState('Date of birth')
+    const [userName, setUserName] = useState('');
+    const [mail, setMail] = useState('')
+    const [pass, setPass] = useState('')
+    const [rPass, setRPass] = useState('')
+    const [phone, setPhone] = useState('');
+
+    const user = {
+        uName: userName,
+        pass: pass,
+        phone: phone,
+        date: date,
+        favoriteProducts: [],
+        order: [],
+        address: '',
+        mail: mail,
+        
+    }
 
     function toggleDatePicker() {
         setOpen(!open)
     }
-    function onChange({ type }, selectedDate) {
+    function onChangeDate({ type }, selectedDate) {
         console.log(type);
         console.log(selectedDate);
         if (type == 'set') {
+            // console.log(selectedDate);
             console.log('join');
             const currentDate = selectedDate
             setDate(currentDate)
@@ -33,6 +58,22 @@ const RegisterScreen = ({ navigation }) => {
             toggleDatePicker()
         }
     }
+
+
+    const add = ()=>{
+        addUser(user);
+        console.log(userAccounts.length);
+    }
+    // console.log(userAccounts);
+
+
+
+
+
+
+
+
+
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
             <ScrollView showsVerticalScrollIndicator={false} style={{ paddingHorizontal: 25 }}>
@@ -43,16 +84,19 @@ const RegisterScreen = ({ navigation }) => {
                 <Text style={styles.titleRegister}>Register</Text>
 
 
-                <InputField label={'Full Name'}
+                <InputField label={'Full Name'} onchange={setUserName} valu={userName}
                     icon={<Ionicons name="person-outline" size={20} color="#666" style={{ marginRight: 5 }} />}
                 />
-                <InputField label={'Email ID'} keyBoardType={'email-address'}
+                <InputField label={'Email ID'} keyBoardType={'email-address'} onchange={setMail} valu={mail}
                     icon={<MaterialIcons name="alternate-email" size={20} color="#666" style={{ marginRight: 5 }} />}
                 />
-                <InputField label={'Pass word'} inputType={"PassWord"}
+                <InputField label={'Phone Number'} keyBoardType={'numeric'} onchange={setPhone} valu={phone}
+                    icon={<Ionicons name="call-outline" size={20} color="#666" style={{ marginRight: 5 }} />}
+                />
+                <InputField label={'Pass word'} inputType={"PassWord"} onchange={setPass} valu={pass}
                     icon={<Ionicons name="ios-lock-closed-outline" size={20} color="#666" style={{ marginRight: 5 }} />}
                 />
-                <InputField label={'Confirm PassWord'} inputType={"PassWord"}
+                <InputField label={'Confirm PassWord'} inputType={"PassWord"} onchange={setRPass} valu={rPass}
                     icon={<Ionicons name="ios-lock-closed-outline" size={20} color="#666" style={{ marginRight: 5 }} />}
                 />
                 <View style={styles.calendarInput}>
@@ -65,10 +109,10 @@ const RegisterScreen = ({ navigation }) => {
                     <DateTimePicker
                         mode='date' display='spinner'
                         value={date}
-                        onChange={onChange}
+                        onChange={onChangeDate}
                         maximumDate={new Date()} minimumDate={new Date('1960-01-01')} />)}
 
-                <CustomButtonAuth label={"Register"} onPress={() => { }} />
+                <CustomButtonAuth label={"Register"} onPress={() => { add() }} />
                 <Text style={styles.textLoginWith}>Or, Register with other...</Text>
 
                 <View style={styles.containerLoginMedia}>

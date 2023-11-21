@@ -7,7 +7,7 @@ import { useFavoriteProducts } from '../../context/context';
 import { imgSliderHome } from '../../data/data';
 const { width, height } = Dimensions.get('window');
 
-export default function FavoriteProductsScreen() {
+export default function FavoriteProductsScreen({ navigation }) {
 
   const [indexSlide, setindexSlide] = useState(0);
   const scrollRef = useRef();
@@ -47,7 +47,7 @@ export default function FavoriteProductsScreen() {
 
 
   // select list
-  const dataSL = ['Tất cả', 'iPhone', 'iPad', 'Macbook']
+  const dataSL = ['Tất cả', 'iphone', 'iPad', 'Macbook']
   const [selectType, setselectType] = useState(dataSL[0]);
 
 
@@ -68,54 +68,41 @@ export default function FavoriteProductsScreen() {
   };
 
   const renderItems = () => {
-    // let vl = selectType.value;
-    // const list = useMemo(() => FavoriteProducts.filter((item) => item.typeProduct === selectType.value), [FavoriteProducts, selectType]);
-    let list = favoriteProducts.filter((item, i) => {
-      console.log('id1: ' + selectType);
-      item.typeProduct === selectType
-    })
-    if (list.length == 0 && favoriteProducts.length == 0) {
-      console.log('id2: ' + selectType + " " + favoriteProducts.length);
+
+    const Item = (item, index) => {
+      return (
+        <TouchableOpacity key={index} className='my-2' onPress={() => { navigation.navigate('ProductDetails', { productItem: item }) }}>
+          <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
+            <Image className='object-contain h-20 w-16' source={item.img[0]} />
+            <View className='w-2/4'><Text>{item.title}</Text></View>
+            <TouchableOpacity key={item.title} onPress={() => { deleteI(item.title) }}>
+              <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+
+    if (favoriteProducts.length == 0) {
       return (
         <View className='w-full my-5'>
           <Text className='text-center text-xl font-normal'>Danh sách sản phẩm trống!</Text>
         </View>
       )
     } else {
-      if (selectType == 'Tất cả') {
-        return (
-          favoriteProducts.map((item, index) => {
-            return (
-              <TouchableOpacity key={index}>
-                <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
-                  <Image className='object-contain h-20 w-16' source={item.img[0]} />
-                  <Text>{item.title}</Text>
-                  <TouchableOpacity key={index} onPress={(index) => { deleteI(index) }}>
-                    <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
-                  </TouchableOpacity>
-                </View>
-              </TouchableOpacity>
-            );
-          })
-        )
+      if (selectType == "Tất cả") {
+        return (favoriteProducts.map((item, index) => {
+          return (
+            Item(item, index)
+          )
+        }))
       } else {
-        {
-          list.map((item, index) => {
-            return (
-              <TouchableOpacity key={index}>
-                <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
-                  <Image className='object-contain h-20 w-16' source={item.img[0]} />
-                  <Text>{item.title}</Text>
-                  <TouchableOpacity key={item.title} onPress={(index) => { deleteI(index) }}>
-                    <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
-                  </TouchableOpacity>
-                </View>
-              </TouchableOpacity>
-            );
-          })
-        }
+        return (favoriteProducts.map((item, index) => {
+          Item(item, index)
+        }))
       }
     }
+
   };
 
 

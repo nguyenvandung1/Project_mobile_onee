@@ -89,11 +89,11 @@ export default function ProductDetails({ route, navigation }) {
 
   return (
     <View className='flex-1 bg-neutral-100 items-center pt-5'>
-      <View style={{ height: height * 0.08, width: width }} className='bg-slate-200 p-2 flex-row justify-between items-center'>
-        <TouchableOpacity className='justify-center items-center w-10 h-10 rounded-xl bg-slate-400 ' onPress={() => { navigation.goBack() }}>
+      <View style={{ height: height * 0.08, width: width }} className='bg-slate-200 flex-row justify-between items-center'>
+        <TouchableOpacity className='justify-center items-center ml-4 w-10 h-10 rounded-xl bg-slate-400 ' onPress={() => { navigation.goBack() }}>
           <Text>{<Ionicon name='chevron-back-outline' size={30} color={'white'} />}</Text>
         </TouchableOpacity>
-        <View className='w-full'>
+        <View className='w-full' style={{width: width-56}}>
           <Text className='text-center text-xl font-semibold text-gray-700'>{productItem.title}</Text>
         </View>
       </View>
@@ -186,7 +186,7 @@ export default function ProductDetails({ route, navigation }) {
         </ScrollView>
       </View>
       <View style={{ height: height * 0.10, width: width }} className=' items-center'>
-        <TouchableOpacity className='h-14 rounded-xl bg-orange-400' style={{ width: width * 0.98 }}>
+        <TouchableOpacity className='h-14 rounded-xl bg-orange-400' style={{ width: width * 0.98 }} onPress={()=>{navigation.navigate('OrderScreen', { productItem: productItem })}}>
           <Text className='text-center my-auto text-white text-xl font-medium'>Đặt hàng ngay</Text>
         </TouchableOpacity>
       </View>

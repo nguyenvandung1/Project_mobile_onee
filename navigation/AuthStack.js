@@ -11,12 +11,16 @@ function AuthStack() {
             {/* <Stack.Navigator initialRouteName='OnBoardingScreen'/> */}
             {/* <Stack.Screen name="HomeScreen" component={HomeScreen}/> */}
             {/* <Stack.Screen name='HomeUserStack' component={HomeUserStack}/> */}
+
+            
             <Stack.Screen name="HomeScreen" component={User}/>
             <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
             <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
             <Stack.Screen name="ForgetScreen" component={ForgetScreen} />
             <Stack.Screen name="ChangePassScreen" component={ChangePassScreen} />
+            {/* <Stack.Screen name="HomeScreen" component={User}/> */}
+
         </Stack.Navigator>
     )
 }
