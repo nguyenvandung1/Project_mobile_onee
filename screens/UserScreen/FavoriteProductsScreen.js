@@ -1,13 +1,13 @@
 import { View, Text, ScrollView, Image, StyleSheet, Dimensions, Button, TouchableOpacity } from 'react-native'
 import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react'
 import Ionicon from 'react-native-vector-icons/Ionicons'
-import { FavoriteProducts, imgSliderHome } from '../../data/data';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { StackView } from '@react-navigation/stack';
 import { useFavoriteProducts } from '../../context/context';
+import { imgSliderHome } from '../../data/data';
 const { width, height } = Dimensions.get('window');
 
-export default function FavoriteProductsScreen() {
+export default function FavoriteProductsScreen({ navigation }) {
 
   const [indexSlide, setindexSlide] = useState(0);
   const scrollRef = useRef();
@@ -44,20 +44,15 @@ export default function FavoriteProductsScreen() {
 
 
   // select list
-  const dataSL = [
-    // { id: 1, value: 'Tất cả' },
-    // { id: 2, value: 'iPhone' },
-    // { id: 3, value: 'iPad' },
-    // { id: 4, value: 'Macbook' },
-    'Tất cả', 'iPhone', 'iPad', 'Macbook'
-  ]
+  const dataSL = ['Tất cả', 'iphone', 'iPad', 'Macbook']
   const [selectType, setselectType] = useState(dataSL[0]);
 
 
   // console.log(selectType);
 
   // item
-  const [arrItems, setArrItems] = useState(FavoriteProducts);
+
+  const { favoriteProducts, setFavoriteProducts } = useFavoriteProducts();
 
 
 
@@ -70,14 +65,22 @@ export default function FavoriteProductsScreen() {
   };
 
   const renderItems = () => {
-    // let vl = selectType.value;
-    // const list = useMemo(() => FavoriteProducts.filter((item) => item.typeProduct === selectType.value), [FavoriteProducts, selectType]);
-    let list = FavoriteProducts.filter((item, i) => {
-      console.log('id1: ' + selectType);
-      item.typeProduct === selectType
-    })
-    if (list.length == 0 && FavoriteProducts.length == 0) {
-      console.log('id2: ' + selectType + " " + FavoriteProducts.length);
+
+    const Item = (item, index) => {
+      return (
+        <TouchableOpacity key={index} className='my-2' onPress={() => { navigation.navigate('ProductDetails', { productItem: item }) }}>
+          <View className='flex-row items-center justify-around w-full h-24 mx-auto bg-white rounded-2xl' style={st.shadow}>
+            <Image className='object-contain w-16 h-20' source={item.img[0]} />
+            <View className='w-2/4'><Text>{item.title}</Text></View>
+            <TouchableOpacity key={item.title} onPress={() => { deleteI(item.title) }}>
+              <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+
+    if (favoriteProducts.length == 0) {
       return (
         <View className='w-full my-5'>
           <Text className='text-xl font-normal text-center'>Danh sách sản phẩm trống!</Text>
@@ -132,9 +135,8 @@ export default function FavoriteProductsScreen() {
     const arrN = [...FavoriteProducts];
 
     setselectType(selectType)
-    FavoriteProducts.splice(index, 1);
-    arrN.splice(index, 1);
-    setProducts(arrN)
+    arrN.splice(vt, 1);
+    setFavoriteProducts(arrN)
   }
 
 
@@ -179,19 +181,20 @@ export default function FavoriteProductsScreen() {
 
             <View className='w-full h-56'>
               <ScrollView style={{ width: width }}>
-                {products.map((item, index) => {
+                {/* {favoriteProducts.map((item, index) => {
                   return (
                     <TouchableOpacity key={index}>
                       <View className='flex-row items-center justify-around w-full h-24 mx-auto bg-white rounded-2xl' style={st.shadow}>
                         <Image className='object-contain w-16 h-20' source={item.img[0]} />
                         <Text>{item.title}</Text>
-                        <TouchableOpacity key={index} onPress={(index) => { deleteI(index) }}>
+                        <TouchableOpacity key={item.title} onPress={() => { deleteI(item.title) }}>
                           <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
                         </TouchableOpacity>
                       </View>
                     </TouchableOpacity>
                   );
-                })}
+                })} */}
+                {renderItems()}
               </ScrollView>
             </View>
           </View>
@@ -212,7 +215,7 @@ const st = StyleSheet.create({
   },
   shadow: {
 
-    elevation: 5,
+    elevation: 1,
     shadowColor: 'black',
     shadowOffset: { width: 6, height: 6 },
     shadowOpacity: 0.1,
