@@ -2,7 +2,6 @@ import { View, Text, ScrollView, Image, StyleSheet, Dimensions, Button, Touchabl
 import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import { SelectList } from 'react-native-dropdown-select-list';
-import { StackView } from '@react-navigation/stack';
 import { useFavoriteProducts } from '../../context/context';
 import { imgSliderHome } from '../../data/data';
 const { width, height } = Dimensions.get('window');
@@ -54,13 +53,9 @@ export default function FavoriteProductsScreen({ navigation }) {
 
   const { favoriteProducts, setFavoriteProducts } = useFavoriteProducts();
 
-
-
-
   const updateSelect = (it) => {
     console.log(it);
     setselectType(it);
-
     // setArrItems(FavoriteProducts);
   };
 
@@ -89,7 +84,7 @@ export default function FavoriteProductsScreen({ navigation }) {
     } else {
       if (selectType == 'Tất cả') {
         return (
-          FavoriteProducts.map((item, index) => {
+          favoriteProducts.map((item, index) => {
             return (
               <TouchableOpacity key={index}>
                 <View className='flex-row items-center justify-around w-full h-24 mx-auto bg-white rounded-2xl' style={st.shadow}>
@@ -125,14 +120,14 @@ export default function FavoriteProductsScreen({ navigation }) {
 
 
 
-  const [products, setProducts] = useState(FavoriteProducts);
+  const [products, setProducts] = useState(favoriteProducts);
 
   useEffect(() => {
-    setProducts(FavoriteProducts);
-  }, [FavoriteProducts]);
+    setProducts(favoriteProducts);
+  }, [favoriteProducts]);
 
   const deleteI = (index) => {
-    const arrN = [...FavoriteProducts];
+    const arrN = [...favoriteProducts];
 
     setselectType(selectType)
     arrN.splice(vt, 1);

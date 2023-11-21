@@ -1,8 +1,3 @@
-
-import React, { useEffect, useState } from 'react'
-
-
-
 const ip1 = require('../assets/images/product/iphone-14-pro-max-128gb.png'), ip2 = require('../assets/images/product/iphone-15-pro-max-256gb_260.png')
 const dataProduct = [
     {
@@ -45,33 +40,33 @@ const dataProduct = [
         productInfo: '',
         typeProduct: 'iphone'
     },
-    {
-        img: [ip4],
-        title: 'iPad 4',
-        priceNew: 26550000,
-        priceOld: 34990000,
-        quantity: 9,
-        productInfo: '',
-        typeProduct: 'iPad'
-    },
-    {
-        img: [ip5],
-        title: 'iPad Pro M1 12.9 inch WiFi Cellular 512GB',
-        priceNew: 26550000,
-        priceOld: 34990000,
-        quantity: 9,
-        productInfo: '',
-        typeProduct: 'iPad'
-    },
-    {
-        img: [ip6],
-        title: 'iPad Pro M2 12.9 inch WiFi Cellular 512GB',
-        priceNew: 26550000,
-        priceOld: 34990000,
-        quantity: 9,
-        productInfo: '',
-        typeProduct: 'iPad'
-    },
+    // {
+    //     img: [ip4],
+    //     title: 'iPad 4',
+    //     priceNew: 26550000,
+    //     priceOld: 34990000,
+    //     quantity: 9,
+    //     productInfo: '',
+    //     typeProduct: 'iPad'
+    // },
+    // {
+    //     img: [ip5],
+    //     title: 'iPad Pro M1 12.9 inch WiFi Cellular 512GB',
+    //     priceNew: 26550000,
+    //     priceOld: 34990000,
+    //     quantity: 9,
+    //     productInfo: '',
+    //     typeProduct: 'iPad'
+    // },
+    // {
+    //     img: [ip6],
+    //     title: 'iPad Pro M2 12.9 inch WiFi Cellular 512GB',
+    //     priceNew: 26550000,
+    //     priceOld: 34990000,
+    //     quantity: 9,
+    //     productInfo: '',
+    //     typeProduct: 'iPad'
+    // },
 ]
 
 
