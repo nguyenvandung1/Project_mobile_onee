@@ -9,8 +9,7 @@ const { width, height } = Dimensions.get('window');
 
 export default function ProductDetails({ route, navigation }) {
 
-
-  const { productItem } = route.params;
+  const productItem = route.params.productItem;
   let priceNew = productItem.priceNew.toLocaleString('en-US');
   let priceOld = productItem.priceOld.toLocaleString('en-US');
   // console.log(productItem);
@@ -78,21 +77,21 @@ export default function ProductDetails({ route, navigation }) {
         return updatedProducts;
       }
     });
-  console.log(favoriteProducts.length);
-  dataFavorite = [...favoriteProducts]
+    console.log(favoriteProducts.length);
+    dataFavorite = [...favoriteProducts]
   };
 
   // console.log(favoriteProducts.length);
 
 
   return (
-    <View className='flex-1 bg-neutral-100 items-center pt-5'>
-      <View style={{ height: height * 0.08, width: width }} className='bg-slate-200 p-2 flex-row justify-between items-center'>
-        <TouchableOpacity className='justify-center items-center w-10 h-10 rounded-xl bg-slate-400 ' onPress={() => { navigation.goBack() }}>
+    <View className='items-center flex-1 pt-5 bg-neutral-100'>
+      <View style={{ height: height * 0.08, width: width }} className='flex-row items-center justify-between p-2 bg-slate-200'>
+        <TouchableOpacity className='items-center justify-center w-10 h-10 rounded-xl bg-slate-400 ' onPress={() => { navigation.goBack() }}>
           <Text>{<Ionicon name='chevron-back-outline' size={30} color={'white'} />}</Text>
         </TouchableOpacity>
         <View className='w-full'>
-          <Text className='text-center text-xl font-semibold text-gray-700'>{productItem.title}</Text>
+          <Text className='text-xl font-semibold text-center text-gray-700'>{productItem.title}</Text>
         </View>
       </View>
 
@@ -106,7 +105,7 @@ export default function ProductDetails({ route, navigation }) {
             >
               {productItem.img.map((img, index) => {
                 return (
-                  <View key={index} className='justify-center items-center' style={{ height: height * 0.4, width: width }}>
+                  <View key={index} className='items-center justify-center' style={{ height: height * 0.4, width: width }}>
                     <Image className='w-60' style={st.img} source={img} />
                   </View>
                 )
@@ -114,10 +113,10 @@ export default function ProductDetails({ route, navigation }) {
 
             </ScrollView>
           </View>
-          <View style={st.price} className='bg-gray-300 flex-row justify-aroundr '>
-            <View style={{ width: width * 0.5 }} className='justify-center items-center h-full'>
-              <Text className='text-orange-600 font-bold text-xl'>{priceNew}₫</Text>
-              <Text className='text-zinc-400 text-xs text-center' style={{ textDecorationLine: 'line-through' }}>₫{priceOld}</Text>
+          <View style={st.price} className='flex-row bg-gray-300 justify-aroundr '>
+            <View style={{ width: width * 0.5 }} className='items-center justify-center h-full'>
+              <Text className='text-xl font-bold text-orange-600'>{priceNew}₫</Text>
+              <Text className='text-xs text-center text-zinc-400' style={{ textDecorationLine: 'line-through' }}>₫{priceOld}</Text>
             </View>
             <View className='items-center justify-center'>
               <Text className='mb-2 text-xl font-medium text-orange-600'>ƯU ĐÃI CÒN LẠI</Text>
@@ -151,31 +150,31 @@ export default function ProductDetails({ route, navigation }) {
               <Text className='text-gray-400'>Số lượng sản phẩm trong kho: {productItem.quantity}</Text>
             </View>
 
-            <View className='w-full h-60  border border-gray-400 rounded-xl py-3 px-2 justify-between my-5'>
-              <View className='flex-row m-2 items-center'>
+            <View className='justify-between w-full px-2 py-3 my-5 border border-gray-400 h-60 rounded-xl'>
+              <View className='flex-row items-center m-2'>
                 <Ionicon name='checkmark-circle' size={25} color={'rgb(37 99 235)'}></Ionicon>
                 <Text className='mx-1'>Bộ sản phẩm gồm: Hộp, Sách hướng dẫn, Cây lấy sim, Cáp Lightning - Type C</Text>
               </View>
 
-              <View className='flex-row m-2 items-center'>
+              <View className='flex-row items-center m-2'>
                 <Ionicon name='checkmark-circle' size={25} color={'rgb(37 99 235)'}></Ionicon>
                 <Text className='mx-1'>Bảo hành chính hãng 1 năm</Text>
               </View>
 
-              <View className='flex-row m-2 items-center'>
+              <View className='flex-row items-center m-2'>
                 <Ionicon name='checkmark-circle' size={25} color={'rgb(37 99 235)'}></Ionicon>
                 <Text className='mx-1'>Giao hàng nhanh toàn quốc</Text>
               </View>
 
-              <View className='flex-row m-2 items-center'>
+              <View className='flex-row items-center m-2'>
                 <Ionicon name='checkmark-circle' size={25} color={'rgb(37 99 235)'}></Ionicon>
                 <Text className='mx-1'>Hoàn thuế cho người nước ngoài</Text>
               </View>
             </View>
 
             <View className='my-5'>
-              <Text className='text-lg font-bold my-2'>Thông tin sản phẩm:</Text>
-              <Text className='text-justify text-base'>
+              <Text className='my-2 text-lg font-bold'>Thông tin sản phẩm:</Text>
+              <Text className='text-base text-justify'>
                 {productItem.productInfo}
               </Text>
             </View>
@@ -183,9 +182,9 @@ export default function ProductDetails({ route, navigation }) {
           </View>
         </ScrollView>
       </View>
-      <View style={{ height: height * 0.10, width: width }} className=' items-center'>
-        <TouchableOpacity className='h-14 rounded-xl bg-orange-400' style={{ width: width * 0.98 }}>
-          <Text className='text-center my-auto text-white text-xl font-medium'>Đặt hàng ngay</Text>
+      <View style={{ height: height * 0.10, width: width }} className='items-center '>
+        <TouchableOpacity className='bg-orange-400 h-14 rounded-xl' style={{ width: width * 0.98 }}>
+          <Text className='my-auto text-xl font-medium text-center text-white'>Đặt hàng ngay</Text>
         </TouchableOpacity>
       </View>
     </View>

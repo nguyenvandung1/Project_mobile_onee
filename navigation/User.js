@@ -15,36 +15,36 @@ export default function User() {
         <UserStack.Navigator screenOptions={({ route }) => ({
             headerShown: false,
             tabBarShowLabel: false,
-            tabBarStyle:{
+            tabBarStyle: {
                 justifyContent: 'space-between',
                 alignItems: 'center'
             },
             tabBarIcon: ({ focused, color }) => {
-                if(route.name === 'HomeUserStack'){
+                if (route.name === 'HomeUserStack') {
                     return (
-                        <View style={[st.container, {backgroundColor: focused ? '#f2f2f2' : 'white',} ]}>
-                            <Ionicon name='home-outline' size={size} color={focused ? 'coral' : '#676767'}/>
+                        <View style={[st.container, { backgroundColor: focused ? '#f2f2f2' : 'white', }]}>
+                            <Ionicon name='home-outline' size={size} color={focused ? 'coral' : '#676767'} />
                             {focused && <Text style={st.text}>Home</Text>}
                         </View>
                     )
-                } else if(route.name === 'SettingUser'){
+                } else if (route.name === 'SettingUser') {
                     return (
-                        <View style={[st.container, {backgroundColor: focused ? '#f2f2f2' : 'white',} ]}>
-                            <Ionicon name='settings-outline' size={size} color={focused ? 'coral' : '#676767'}/>
+                        <View style={[st.container, { backgroundColor: focused ? '#f2f2f2' : 'white', }]}>
+                            <Ionicon name='settings-outline' size={size} color={focused ? 'coral' : '#676767'} />
                             {focused && <Text style={st.text}>Setting</Text>}
                         </View>
                     )
-                } else if(route.name === 'ShoppingCart'){
+                } else if (route.name === 'ShoppingCart') {
                     return (
-                        <View style={[st.container, {backgroundColor: focused ? '#f2f2f2' : 'white',} ]}>
-                            <Ionicon name='cart-outline' size={size} color={focused ? 'coral' : '#676767'}/>
+                        <View style={[st.container, { backgroundColor: focused ? '#f2f2f2' : 'white', }]}>
+                            <Ionicon name='cart-outline' size={size} color={focused ? 'coral' : '#676767'} />
                             {focused && <Text style={st.text}>Cart</Text>}
                         </View>
                     )
-                } else if(route.name === 'FavoriteProducts'){
+                } else if (route.name === 'FavoriteProducts') {
                     return (
-                        <View style={[st.container, {backgroundColor: focused ? '#f2f2f2' : 'white',} ]}>
-                            <Ionicon name='heart-outline' size={size} color={focused ? 'coral' : '#676767'}/>
+                        <View style={[st.container, { backgroundColor: focused ? '#f2f2f2' : 'white', }]}>
+                            <Ionicon name='heart-outline' size={size} color={focused ? 'coral' : '#676767'} />
                             {focused && <Text style={st.text}>Favorite</Text>}
                         </View>
                     )
@@ -72,14 +72,14 @@ export default function User() {
 const st = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'center', 
-        alignItems:'center', 
+        justifyContent: 'center',
+        alignItems: 'center',
         borderRadius: 20,
         width: 95,
         height: 40
-        
+
     },
-    text:{
+    text: {
         marginStart: 2,
         color: 'rgb(39 39 42)',
         fontWeight: '600'

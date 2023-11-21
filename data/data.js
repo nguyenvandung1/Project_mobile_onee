@@ -1,11 +1,7 @@
-
-import React, { useEffect, useState } from 'react'
-
-
-
 const ip1 = require('../assets/images/product/iphone-14-pro-max-128gb.png'), ip2 = require('../assets/images/product/iphone-15-pro-max-256gb_260.png')
 const dataProduct = [
     {
+        id: 1,
         img: [ip1, ip2],
         title: 'iPhone 14 Pro Max 128GB',
         priceNew: 26550000,
@@ -15,6 +11,7 @@ const dataProduct = [
         typeProduct: 'iphone'
     },
     {
+        id: 2,
         img: [require('../assets/images/product/iphone-15-128gb_240.png')],
         title: 'iPhone 15 128GB',
         priceNew: 26550000,
@@ -24,6 +21,7 @@ const dataProduct = [
         typeProduct: 'iphone'
     },
     {
+        id: 3,
         img: [require('../assets/images/product/iphone-15-pro-128gb_250.png')],
         title: 'iPhone 14 Pro Max 128GB',
         priceNew: 26550000,
@@ -33,6 +31,7 @@ const dataProduct = [
         typeProduct: 'iphone'
     },
     {
+        id: 4,
         img: [require('../assets/images/product/iphone-15-pro-max-256gb_260.png')],
         title: 'iPhone 15 Pro Max 128GB',
         priceNew: 26550000,
@@ -42,8 +41,6 @@ const dataProduct = [
         typeProduct: 'iphone'
     },
 ]
-
-
 
 
 const img1 = require('../assets/images/imgSlider/img_1.png');
@@ -91,7 +88,7 @@ let dataFavorite = [];
 //     setFavoriteProducts([])
 // }, [])
 
-export { dataProduct, imgSliderHome , dataFavorite};
+export { dataProduct, imgSliderHome, dataFavorite };
 
 
 

@@ -19,9 +19,6 @@ export default function FavoriteProductsScreen() {
     }
   }
 
-
-  // autoSlide();
-
   const dotClick = (index) => {
     setindexSlide(index);
     const scrollX = width * index;
@@ -33,7 +30,7 @@ export default function FavoriteProductsScreen() {
 
 
   const dots = imgSliderHome.map((i) => (
-    <TouchableOpacity key={i.id} className='justify-center items-center mx-2 h-12' onPress={() => dotClick(i.id)}>
+    <TouchableOpacity key={i.id} className='items-center justify-center h-12 mx-2' onPress={() => dotClick(i.id)}>
       <Text
         className={`text-6xl h-12 font-thin ${indexSlide === i.id ? 'text-black font-extralight' : 'text-white font-thin'
           }`}
@@ -62,7 +59,7 @@ export default function FavoriteProductsScreen() {
   // item
   const [arrItems, setArrItems] = useState(FavoriteProducts);
 
-  
+
 
 
   const updateSelect = (it) => {
@@ -83,7 +80,7 @@ export default function FavoriteProductsScreen() {
       console.log('id2: ' + selectType + " " + FavoriteProducts.length);
       return (
         <View className='w-full my-5'>
-          <Text className='text-center text-xl font-normal'>Danh sách sản phẩm trống!</Text>
+          <Text className='text-xl font-normal text-center'>Danh sách sản phẩm trống!</Text>
         </View>
       )
     } else {
@@ -92,8 +89,8 @@ export default function FavoriteProductsScreen() {
           FavoriteProducts.map((item, index) => {
             return (
               <TouchableOpacity key={index}>
-                <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
-                  <Image className='object-contain h-20 w-16' source={item.img[0]} />
+                <View className='flex-row items-center justify-around w-full h-24 mx-auto bg-white rounded-2xl' style={st.shadow}>
+                  <Image className='object-contain w-16 h-20' source={item.img[0]} />
                   <Text>{item.title}</Text>
                   <TouchableOpacity key={index} onPress={(index) => { deleteI(index) }}>
                     <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
@@ -108,8 +105,8 @@ export default function FavoriteProductsScreen() {
           list.map((item, index) => {
             return (
               <TouchableOpacity key={index}>
-                <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
-                  <Image className='object-contain h-20 w-16' source={item.img[0]} />
+                <View className='flex-row items-center justify-around w-full h-24 mx-auto bg-white rounded-2xl' style={st.shadow}>
+                  <Image className='object-contain w-16 h-20' source={item.img[0]} />
                   <Text>{item.title}</Text>
                   <TouchableOpacity key={index} onPress={(index) => { deleteI(index) }}>
                     <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
@@ -143,50 +140,50 @@ export default function FavoriteProductsScreen() {
 
 
   return (
-    <View className='flex-1 bg-neutral-100 items-center pt-5 '>
-      <View style={{ height: height * 0.08, width: width }} className='bg-slate-400 p-2 flex-row justify-center items-center'>
-        <Text className='text-center text-xl font-semibold text-white'>FavoriteProducts</Text>
+    <View className='items-center flex-1 pt-5 bg-neutral-100 '>
+      <View style={{ height: height * 0.08, width: width }} className='flex-row items-center justify-center p-2 bg-slate-400'>
+        <Text className='text-xl font-semibold text-center text-white'>FavoriteProducts</Text>
       </View>
-      <View className='h-auto w-full justify-start items-center bg-white' style={{ flex: 0.999 }}>
+      <View className='items-center justify-start w-full h-auto bg-white' style={{ flex: 0.999 }}>
         <View>
 
-          <View className='bg-slate-200 h-56 pt-10'>
+          <View className='h-56 pt-10 bg-slate-200'>
             <ScrollView
               onScroll={({ nativeEvent }) => onChange(nativeEvent)}
               showsHorizontalScrollIndicator={false}
               pagingEnabled
               horizontal
-              className=' bg-white'
+              className='bg-white '
               ref={scrollRef}
               scrollEventThrottle={32}
             >
               {imgSliderHome.map((img, index) => {
                 return (
-                  <View key={index} className='justify-center items-center' style={{ width: width }}>
+                  <View key={index} className='items-center justify-center' style={{ width: width }}>
                     <Image className='object-contain' style={st.img} source={img.img} />
                   </View>
                 )
               })}
 
             </ScrollView>
-            <View className=' justify-center items-center flex-row' style={{ width: width }}>
+            <View className='flex-row items-center justify-center ' style={{ width: width }}>
               {dots}
             </View>
           </View>
 
           <View className='my-5 '>
-            <Text className='text-center font-medium text-xl'>Sản phẩm yêu thích</Text>
+            <Text className='text-xl font-medium text-center'>Sản phẩm yêu thích</Text>
             <View className='w-2/4 px-5 my-5'>
               <SelectList placeholder='Tất Cả' data={dataSL} setSelected={updateSelect} />
             </View>
 
-            <View className='h-56 w-full'>
+            <View className='w-full h-56'>
               <ScrollView style={{ width: width }}>
                 {products.map((item, index) => {
                   return (
                     <TouchableOpacity key={index}>
-                      <View className='w-full mx-auto h-24 flex-row bg-white justify-around items-center rounded-2xl' style={st.shadow}>
-                        <Image className='object-contain h-20 w-16' source={item.img[0]} />
+                      <View className='flex-row items-center justify-around w-full h-24 mx-auto bg-white rounded-2xl' style={st.shadow}>
+                        <Image className='object-contain w-16 h-20' source={item.img[0]} />
                         <Text>{item.title}</Text>
                         <TouchableOpacity key={index} onPress={(index) => { deleteI(index) }}>
                           <Ionicon name='trash' size={35} color={'rgb(300 31 100)'} />
